@@ -16,7 +16,9 @@ To run this program, go to `yield` directory and run `node index.js`.
 
 **React Native**
 - Go to react native graph ql directory using `cd graphql/reactGraphQL`
+- Make sure you have changed the endpoint in `graphql/reactGraphQL/config.js`
 - Build react native application using `react-native run-android`
+
 
 **Data Schema**
 ```
