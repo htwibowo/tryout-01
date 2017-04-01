@@ -41,6 +41,7 @@ To run this program, go to `yield` directory and run `node index.js`.
 ```
 
 **Sample Data**
+
 This application contains sample data.
 ```JSON
 {
