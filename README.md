@@ -75,6 +75,10 @@ This application contains sample data.
 
 ## WebSocket
 
+> _Work in Progress, subject to change_
+
+To run websocket server, go to websocket server directory using `cd websocket/server` and run using `npm start`
+
 ## License
 
 MIT
