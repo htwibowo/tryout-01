@@ -7,16 +7,17 @@ var io = require('socket.io')(server);
 server.listen(3100, '0.0.0.0');
 
 app.get('/', function (req, res) {
-    res.sendfile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function (socket) {
     socket.emit('connected', { hello: 'Hello, Selamat Datang' });
 
-    console.log('Isi dari pesan pas tombol ditekan: ', data);
+    socket.on('connected', msg => {
+        console.log('pesan dari client: ', msg)
+    })
 
-    socket.on('tombol ditekan', function (data) {
-        console.log('Isi dari pesan pas tombol ditekan: ', data);
-    });
+    console.log('Ada koneksi baru');
 });
+
 

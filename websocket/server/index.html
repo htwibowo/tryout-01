@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button onclick="sendMessage()">Kirim Pesan!</button>
+
+    <script src="./socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:3100/socketio');
+        socket.emit('connected', { hello: 'Hello, Saya User' });
+
+        function sendMessage() {
+            socket.emit('message', 'sample message')
+        }
+   </script>
+</body>
+</html>
