@@ -2,9 +2,16 @@
 
 This repository contains source codes for Refactory's Try Out 01, which includes:
 
-## Table of Content
+## TABLE OF CONTENT
 
-[TOC]
+   * [Refactory - Try Out 01](#refactory---try-out-01)
+      * [TABLE OF CONTENT](#table-of-content)
+      * [HOW TO RUN](#how-to-run)
+         * [Generator - Yield](#generator---yield)
+         * [GraphQL](#graphql)
+         * [WebSocket](#websocket)
+      * [LICENSE](#license)
+      * [FOOTNOTE](#footnote)
 
 ## HOW TO RUN
 
