@@ -1,0 +1,3 @@
+rootProject.name = 'reactWebSocket'
+
+include ':app'
