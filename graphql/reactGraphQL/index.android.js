@@ -12,6 +12,7 @@ import {
     View,
     ListView,
     Dimensions,
+    TouchableOpacity,
 } from 'react-native';
 
 import config from './config'
@@ -33,37 +34,86 @@ export default class reactGraphQL extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ListView style={styles.listItem} dataSource={this.state.books} renderRow={item => this.renderItem(item)}></ListView>
+                <Text style={{ fontSize: 20, paddingTop: 12 }}>Book List</Text>
+                <ListView
+                    style={styles.listItem}
+                    dataSource={this.state.books}
+                    renderRow={item => this.renderItem(item)}>
+                </ListView>
             </View>
         );
     }
 
+    down(id) {
+        downvote(id).then(items => this.reloadList(items))
+    }
+
+    up(id) {
+        upvote(id).then(items => this.reloadList(items))
+    }
+
+    reloadList(items) {
+        this.setState({
+            books: ds.cloneWithRows(items)
+        })
+    }
+
     refresh() {
-        fetchItems().then(items => {
-            this.setState({
-                books: ds.cloneWithRows(items)
-            })
-        }).catch(err => console.log(err))
+        fetchItems().then(items => this.reloadList(items)).catch(err => console.log(err))
     }
 
     renderItem(item) {
         return (
-            <View style={styles.item}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.author}>Written By {item.title}</Text>
+            <View style={[styles.item, {flexDirection: 'row'}]}>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
+                    <View style={{ flex: 1}} >
+                        <TouchableOpacity onPress={() => this.up(item.id)} style={styles.button}>
+                            <Text>^</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.down(item.id)} style={styles.button}>
+                            <Text>v</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <Text style={{ textAlign: 'center', paddingTop: 12 }}>{item.vote}</Text>
+                    </View>
+                </View>
+                <View style={{ flex: 5 }}>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.author}>Written By {item.author}</Text>
+                </View>
             </View>
         )
     }
+}
+
+async function upvote(id) {
+    const responses = await fetch(config.endPoint, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/graphql' },
+        body: `mutation { upvote(id: ${id}) }`,
+    })
+
+    return await fetchItems()
+}
+
+async function downvote(id) {
+    const responses = await fetch(config.endPoint, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/graphql' },
+        body: `mutation { downvote(id: ${id}) }`,
+    })
+
+    return await fetchItems()
 }
 
 async function fetchItems() {
     const responses = await fetch(config.endPoint, {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/graphql' },
-        body: `{ books { id title author synopsis } }`,
+        body: `{ books { id title author vote } }`,
     })
 
-    console.log('YEAY BOOKS!', JSON.parse(responses._bodyText).data.books)
     return JSON.parse(responses._bodyText).data.books
 }
 
@@ -76,6 +126,11 @@ const styles = StyleSheet.create({
     listItem: {
         flex: 1,
         width
+    },
+    button: {
+        alignItems: 'center',
+        padding: 2,
+        backgroundColor: '#ddd',
     },
     container: {
         flex: 1,
