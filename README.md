@@ -2,11 +2,17 @@
 
 This repository contains source codes for Refactory's Try Out 01, which includes:
 
-- Generator - Yield
-- Websocket (React Native and Express Web Server)
-- GraphQL (React Native and Express Web Server)
+## Table of Content
+
+[TOC]
 
 ## HOW TO RUN
+
+### Generator - Yield
+
+### GraphQL
+
+### WebSocket
 
 ## LICENSE
 
