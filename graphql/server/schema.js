@@ -4,6 +4,19 @@ const { buildSchema } = require('graphql')
 const Book = require('./book')
 const { findBook, data, generateKey } = require('./data')
 
+const book1 = new Book({ title: 'Sample Book', synopsis: 'lorem ipsum', author: 'Harry Tri Wibowo' })
+book1.setId(1)
+
+const book2 = new Book({ title: 'Sample Book #2', synopsis: 'lorem ipsum', author: 'Harry Tri Wibowo' })
+book2.setId(2)
+
+const book3 = new Book({ title: 'Sample Book: The Trilogy', synopsis: 'lorem ipsum', author: 'Harry Tri Wibowo' })
+book3.setId(3)
+
+data.push(book1)
+data.push(book2)
+data.push(book3)
+
 const schema = buildSchema(`
     type Mutation {
         upvote(id: Int): Boolean!
