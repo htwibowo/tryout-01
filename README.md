@@ -77,9 +77,22 @@ This application contains sample data.
 
 ## WebSocket
 
-> _Work in Progress, subject to change_
+**Server**
 
-To run websocket server, go to websocket server directory using `cd websocket/server` and run using `npm start`
+- Go to server directory of WebSocket using `cd websocket/server`
+- If you just clone this repository, you have to install all dependencies using `yarn install` or `npm install`
+- Run the server using `yarn start` or `npm start`
+
+**React Native**
+- Go to react native WebSocket directory using `cd websocket/reactWebSocket`
+- Make sure you have changed the endpoint in `websocket/reactWebSocket/config.js`
+- Build react native application using `react-native run-android`
+
+**Screenshot**
+
+[!websocket-first]('./assets/websocket-first.png')
+
+[!websocket-next]('./assets/websocket-next.png')
 
 ## License
 
