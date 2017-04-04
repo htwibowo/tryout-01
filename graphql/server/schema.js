@@ -79,7 +79,22 @@ const root = {
     },
 
     books() {
-        return data
+        // clone data to prevent structure changes because of array sort
+        const sorted = data.slice(0)
+
+        sorted.sort((itemA, itemB) => {
+            if (itemA.vote < itemB.vote) {
+                return 1
+            } else if (itemA.vote > itemB.vote) {
+                return -1
+            }
+
+            return 0
+        })
+
+        console.log(sorted)
+
+        return sorted
     }
 }
 
