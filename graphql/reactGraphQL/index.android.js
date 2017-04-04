@@ -17,6 +17,8 @@ import {
 
 import config from './config'
 
+import bookService from './services/book'
+
 const { width } = Dimensions.get('window')
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
@@ -40,26 +42,34 @@ export default class reactGraphQL extends Component {
                     dataSource={this.state.books}
                     renderRow={item => this.renderItem(item)}>
                 </ListView>
+                <TouchableOpacity onPress={() => this.add()} style={[styles.button, {padding: 16, margin: 8}]}>
+                    <Text>+ Add New Book</Text>
+                </TouchableOpacity>
             </View>
         );
     }
 
+    add() {
+        bookService.addNew().then(items => this.reloadList(items))
+    }
+
     down(id) {
-        downvote(id).then(items => this.reloadList(items))
+        bookService.downvote(id).then(items => this.reloadList(items))
     }
 
     up(id) {
-        upvote(id).then(items => this.reloadList(items))
+        bookService.upvote(id).then(items => this.reloadList(items))
     }
 
     reloadList(items) {
+        console.log(items)
         this.setState({
             books: ds.cloneWithRows(items)
         })
     }
 
     refresh() {
-        fetchItems().then(items => this.reloadList(items)).catch(err => console.log(err))
+        bookService.all().then(items => this.reloadList(items)).catch(err => console.log(err))
     }
 
     renderItem(item) {
@@ -85,36 +95,6 @@ export default class reactGraphQL extends Component {
             </View>
         )
     }
-}
-
-async function upvote(id) {
-    const responses = await fetch(config.endPoint, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/graphql' },
-        body: `mutation { upvote(id: ${id}) }`,
-    })
-
-    return await fetchItems()
-}
-
-async function downvote(id) {
-    const responses = await fetch(config.endPoint, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/graphql' },
-        body: `mutation { downvote(id: ${id}) }`,
-    })
-
-    return await fetchItems()
-}
-
-async function fetchItems() {
-    const responses = await fetch(config.endPoint, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/graphql' },
-        body: `{ books { id title author vote } }`,
-    })
-
-    return JSON.parse(responses._bodyText).data.books
 }
 
 const styles = StyleSheet.create({
