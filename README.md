@@ -90,9 +90,9 @@ This application contains sample data.
 
 **Screenshot**
 
-[!websocket-first]('./assets/websocket-first.png')
+[!websocket-first]('https://raw.githubusercontent.com/htwibowo/tryout-01/master/assets/websocket-first.png')
 
-[!websocket-next]('./assets/websocket-next.png')
+[!websocket-next]('https://raw.githubusercontent.com/htwibowo/tryout-01/master/assets/websocket-next.png')
 
 ## License
 
