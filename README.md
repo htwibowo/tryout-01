@@ -90,9 +90,11 @@ This application contains sample data.
 
 **Screenshot**
 
-![websocket-first](https://raw.githubusercontent.com/htwibowo/tryout-01/master/assets/websocket-first.png)
+![websocket-first](https://raw.githubusercontent.com/htwibowo/tryout-01/master/assets/websocket-first.png | height=300)
+*UI of the application in the first run.*
 
-![websocket-next](https://raw.githubusercontent.com/htwibowo/tryout-01/master/assets/websocket-next.png)
+![websocket-next](https://raw.githubusercontent.com/htwibowo/tryout-01/master/assets/websocket-next.png | height=300)
+*What application prints after user clicking on `Ping!` button.*
 
 ## License
 
